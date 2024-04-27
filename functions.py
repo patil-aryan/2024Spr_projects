@@ -52,3 +52,7 @@ bitcoin = crypto_dataset("./Crypto Dataset/bitcoin_2013-01-01_2024-04-22.csv", s
                          end_date='2022-02-04')
 
 print(bitcoin)
+
+ethereum = crypto_dataset("./Crypto Dataset/ethereum_2016-01-01_2024-04-22.csv")
+
+print(ethereum)
