@@ -56,4 +56,4 @@ print(bitcoin)
 ethereum = crypto_dataset("./Crypto Dataset/ethereum_2016-01-01_2024-04-22.csv")
 
 print(ethereum.head())
-print()
+
