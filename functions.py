@@ -84,6 +84,7 @@ def crypto_sentiment(dataset_path: str) -> None:
     plt.show()
 
 
+
 if __name__ == "__main__":
     bitcoin = crypto_dataset("./Crypto Dataset/bitcoin_2013-01-01_2024-04-22.csv", period_one='2022-01-01',
                              period_two='2022-02-04')
