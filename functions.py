@@ -250,7 +250,7 @@ def plot_usd_trends(combined_data: pd.DataFrame) -> None:
 
     ax1.plot(combined_data['Date'], combined_data['Price'], color='blue', label='Federal Interest Rate')
     ax1.set_xlabel('Date')
-    ax1.set_ylabel('Federal Interest Rate', color='blue')
+    ax1.set_ylabel('USD', color='blue')
     ax1.tick_params('y', colors='blue')
 
     ax2 = ax1.twinx()
@@ -259,7 +259,7 @@ def plot_usd_trends(combined_data: pd.DataFrame) -> None:
     ax2.set_ylabel('Close Price', color='red')
     ax2.tick_params('y', colors='red')
 
-    plt.title('Federal Interest v/s Crypto Price')
+    plt.title('USD v/s Crypto Price')
     plt.xticks(rotation=45)
     plt.show()
 
