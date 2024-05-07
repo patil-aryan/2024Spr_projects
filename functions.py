@@ -18,10 +18,25 @@ def crypto_dataset(dataset_path: str, period_one: Optional[str] = None,
     :raises ValueError: If the given dataset path is incorrect or if the period of dates is not in range of the dataset.
 
 
->>> c = crypto_dataset("./Crypto Dataset/bitcoin_2013-01-01_2024-04-22.csv", period_one='2022-01-01',
-                            period_two='2022-01-04')
+>>> c = crypto_dataset("./Crypto Dataset/bitcoin_2013-01-01_2024-04-22.csv", period_one='2022-01-01',period_two='2022-01-04')
 >>> print(c.shape)
 (4, 7)
+
+>>> crypto_dataset("./Crypto Dataset/bitcoin_2013-01-01_2024-04-22.csv", period_one='2025-01-01',period_two='2025-01-04')
+Traceback (most recent call last):
+...
+ValueError: No data found within the specified date range: 2025-01-01 to 2025-01-04
+
+>>> crypto_dataset("./Crypto Dataset/bitcoin_2013-01-01_2024-04-22.csv", period_one='2022-01-01',period_two='2022-01-04')
+... # doctest: +NORMALIZE_WHITESPACE
+... # doctest: +ELLIPSIS
+          Date          Open  ...        Volume    Market Cap
+841 2022-01-01  46198.203781  ...  9.941362e+10  8.911811e+11
+840 2022-01-02  47722.939700  ...  7.453585e+10  8.936273e+11
+839 2022-01-03  47311.946700  ...  1.159970e+11  8.857233e+11
+838 2022-01-04  46412.079600  ...  7.467415e+10  8.784294e+11
+<BLANKLINE>
+[4 rows x 7 columns]
 
     """
 
@@ -58,6 +73,10 @@ def crypto_sentiment(dataset_path: str) -> None:
     :param dataset_path: Path to the csv file containing the crypto dataset with sentiment
     :return: None
 
+>>> c = pd.read_csv('TwitterData/btc_selected_with_sentiment_2023_01_02_2023_06_12.csv')
+>>> positive_sentiment = c[(c['sentiment_type'] == 'POSITIVE') &  (c['changes']  == 'positive')]
+>>> len(positive_sentiment)
+74
     """
     crypto_df = pd.read_csv(dataset_path)
     crypto_df['PercentChange'] = crypto_df['close'].pct_change() * 100
@@ -126,6 +145,23 @@ def combine_inflation_crypto(inflation_file: str, crypto: pd.DataFrame) -> pd.Da
     :param inflation_file: Path to the dataset
     :param crypto: Dataframe containing cryptocurrency
     :return: Dataframe containing the combined data
+
+>>> btc = crypto_dataset("./Crypto Dataset/bitcoin_2013-01-01_2024-04-22.csv")
+>>> combine_inflation_crypto('EconomicFactors/world-inflation-rate-cpi.csv', btc)
+... # doctest: +NORMALIZE_WHITESPACE
+... # doctest: +ELLIPSIS
+        date   Inflation Rate (%)  ...        Volume    Market Cap
+0 2015-12-31               1.4439  ...  4.341306e+07  6.390443e+09
+1 2016-12-31               1.6055  ...  1.335818e+08  1.534369e+10
+2 2017-12-31               2.2543  ...  1.181868e+10  2.296027e+11
+3 2018-12-31               2.4504  ...  3.648742e+09  6.640670e+10
+4 2019-12-31               2.2061  ...  1.923169e+10  1.306356e+11
+5 2020-12-31               1.9369  ...  7.927135e+10  5.363150e+11
+6 2021-12-31               3.4669  ...  7.810027e+10  8.945653e+11
+7 2022-12-31               7.9676  ...  3.406534e+10  3.183907e+11
+<BLANKLINE>
+[8 rows x 11 columns]
+
     """
 
     inflation_data = pd.read_csv(inflation_file, skiprows=16)
@@ -172,6 +208,32 @@ def combine_fed_rates_crypto(federal_rates: str, crypto: pd.DataFrame, period_on
     :param period_one: Optional parameter to filter the dataset from a given range
     :param period_two: Optional parameter to filter the dataset from a given range
     :return: pd.DataFrame : Combined Dataframe
+
+>>> btc = crypto_dataset("./Crypto Dataset/bitcoin_2013-01-01_2024-04-22.csv")
+>>> combine_fed_rates_crypto('EconomicFactors/FEDFUNDS.csv', btc, period_one = '2025-01-01', period_two= '2025-01-04')
+Traceback (most recent call last):
+  ...
+ValueError: No data found within the specified date range: 2025-01-01 to 2025-01-04
+
+>>> combine_fed_rates_crypto('EconomicFactors/FEDFUNDS.csv', btc, period_one = '2018-01-01', period_two= '2018-12-31')
+... # doctest: +NORMALIZE_WHITESPACE
+... # doctest: +ELLIPSIS
+        DATE  FEDFUNDS       Date  ...         Close        Volume    Market Cap
+24 2018-01-01      1.41 2018-01-01  ...  13577.188555  9.527935e+09  2.292229e+11
+25 2018-02-01      1.42 2018-02-01  ...   9171.249369  4.557095e+09  1.620348e+11
+26 2018-03-01      1.51 2018-03-01  ...  10929.765497  3.441035e+09  1.796653e+11
+27 2018-04-01      1.69 2018-04-01  ...   6830.630577  3.598865e+09  1.162929e+11
+28 2018-05-01      1.70 2018-05-01  ...   9096.810022  6.156448e+09  1.532087e+11
+29 2018-06-01      1.82 2018-06-01  ...   7525.473797  3.534811e+09  1.277794e+11
+30 2018-07-01      1.91 2018-07-01  ...   6364.401842  3.508360e+09  1.090069e+11
+31 2018-08-01      1.91 2018-08-01  ...   7596.721803  4.823441e+09  1.302081e+11
+32 2018-09-01      1.95 2018-09-01  ...   7193.248733  3.736417e+09  1.224339e+11
+33 2018-10-01      2.19 2018-10-01  ...   6596.018098  3.103182e+09  1.142173e+11
+34 2018-11-01      2.20 2018-11-01  ...   6368.306136  3.290644e+09  1.099704e+11
+35 2018-12-01      2.27 2018-12-01  ...   4208.469723  3.729733e+09  7.190973e+10
+<BLANKLINE>
+[12 rows x 9 columns]
+
     """
     fedfunds = pd.read_csv(federal_rates)
     fedfunds['DATE'] = pd.to_datetime(fedfunds['DATE'])
@@ -221,7 +283,23 @@ def combine_usd_crypto(usd_file: str, crypto: pd.DataFrame, period_one: Optional
     :param crypto: Cryptocurrency Dataset
     :param period_one: Optional parameter to filter the dataset from a given range
     :param period_two: Optional parameter to filter the dataset from a given range
-    :return:
+    :return: Dataframe with combined US Dollar and Crypto Dataset
+
+>>> btc = crypto_dataset("./Crypto Dataset/bitcoin_2013-01-01_2024-04-22.csv")
+>>> combine_usd_crypto('EconomicFactors/US Dollar Index Historical Data.csv', btc, period_one = '2025-01-01', period_two= '2025-01-04')
+Traceback (most recent call last):
+...
+ValueError: No data found within the specified date range: 2025-01-01 to 2025-01-04
+
+>>> combine_usd_crypto('EconomicFactors/US Dollar Index Historical Data.csv', btc, period_one = '2024-01-01', period_two= '2024-01-04')
+... # doctest: +NORMALIZE_WHITESPACE
+... # doctest: +ELLIPSIS
+            Date   Price  Open_x  ...     Close        Volume    Market Cap
+2087 2024-01-02  102.20  101.42  ...  44957.63  4.663793e+10  8.859783e+11
+2088 2024-01-03  102.49  102.15  ...  42818.03  9.930917e+10  8.601401e+11
+2089 2024-01-04  102.42  102.46  ...  44188.15  1.638240e+11  8.514089e+11
+<BLANKLINE>
+[3 rows x 13 columns]
     """
     usd = pd.read_csv(usd_file)
     usd['Date'] = pd.to_datetime(usd['Date'])
@@ -268,8 +346,9 @@ if __name__ == "__main__":
     bitcoin = crypto_dataset("./Crypto Dataset/bitcoin_2013-01-01_2024-04-22.csv", period_one='2022-01-01',
                              period_two='2022-02-04')
 
-    print(bitcoin)
+    print(bitcoin.head())
 
-    ethereum = crypto_dataset("./Crypto Dataset/ethereum_2016-01-01_2024-04-22.csv")
+    ethereum = crypto_dataset("./Crypto Dataset/ethereum_2016-01-01_2024-04-22.csv", period_one='2022-01-01',
+                              period_two='2022-02-04')
 
     print(ethereum.head())
