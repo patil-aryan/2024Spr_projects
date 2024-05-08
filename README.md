@@ -22,6 +22,10 @@ influence on Bitcoin’s price.
 
 ## Analysis - 
 
+# Twitter Sentiment -
+![img_1.png](img_1.png)
+While not a perfect correlation, there seem to be instances where positive sentiment aligns with price increases and negative sentiment coincides with price drops. This suggests that market sentiment, as captured by the indicators, can play a role in influencing short-term price movements.
+
 ## References -
 
 *  Twitter Datasets - https://www.researchsquare.com/article/rs-3192598/v1
