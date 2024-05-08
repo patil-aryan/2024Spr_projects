@@ -22,9 +22,31 @@ influence on Bitcoin’s price.
 
 ## Analysis - 
 
-# Twitter Sentiment -
+## Twitter Sentiment -
 ![img_1.png](img_1.png)
 While not a perfect correlation, there seem to be instances where positive sentiment aligns with price increases and negative sentiment coincides with price drops. This suggests that market sentiment, as captured by the indicators, can play a role in influencing short-term price movements.
+
+## Unemployment
+![img_2.png](img_2.png)
+Although, there's no direct relation, we can see some trends in 2023. But the relationship is not consistent.
+
+## Inflation Rates
+![img_3.png](img_3.png)
+Trends are quite evident after 2022, with most of the cryptocurrencies dipping low due to the rise in inflation rate around the world.Inflation is influenced by various economic factors such as supply chain disruptions, energy prices, monetary policy, and geopolitical events. These factors can also indirectly impact cryptocurrency prices.
+
+## Federal Interest Rates
+![img_4.png](img_4.png)
+As evident from the plots, they do inhibit an inverse relationship, like in the year 2022, where there was a drastic increase in federal interest rates to combat inflation, which led to disruption in crypto market.
+
+## US DOLLAR
+![img_5.png](img_5.png)
+In the year 2022, the graph displays a general inverse correlation between the value of the US Dollar (USD) and the crypto price. As the USD strengthens, the crypto price tends to decrease, and vice versa. This aligns with the concept of currency correlation, where a stronger USD can make cryptocurrencies appear less attractive, potentially leading to a decrease in demand and price.
+
+## Conclusion
+Not one single dominating factor. We cannot say with certainty that any one particular factor has a direct influence over cryptocurrencies. Maybe Federal Rates can play as an indicator whether crypto prices may go up or down. Cryptocurrencies being highly volatile are sensitive towards the market sentiment. People with strong influence can act as a catalyst to move the cryptocurrency market. Economic factors in combination can play a role in influencing the prices of cryptocurrencies.
+Thus, invest wisely!
+
+
 
 ## References -
 
